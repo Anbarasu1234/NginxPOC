@@ -22,7 +22,7 @@ spec:
                   - key: module
                     operator: In
                     values:
-                      - NGINX
+                      - NGIN
       containers:
       - name: nginx
         image: nginx:latest
