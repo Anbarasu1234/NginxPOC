@@ -15,8 +15,6 @@ spec:
         app: nginx
         tier: test-deployment
     spec:
-      nodeSelector:
-        nginx: true
       containers:
       - name: nginx
         image: nginx:latest
