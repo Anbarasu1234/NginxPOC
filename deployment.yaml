@@ -1,26 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: deploy-nginx
   namespace: conm-system
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: nginx
-      tier: test-deployment
-  replicas: 1
+      app: my-app
   template:
     metadata:
       labels:
-        app: nginx
-        tier: test-deployment
+        app: my-app
     spec:
+      nodeSelector:
+        nginx: "true"
+
       containers:
-      - name: nginx
-        image: nginx:latest
-        resources:
-          requests:
-            cpu: 100m
-            memory: 100Mi
-        ports:
-        - containerPort: 80
+        - name: my-app
+          image: nginx
