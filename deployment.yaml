@@ -1,7 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: conm-system
+  labels:
+    name: conm-system
+--
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: test-deployment
+  name: nginx-deployment
+  namespace: conm-system
 spec:
   selector:
     matchLabels:
@@ -14,15 +22,8 @@ spec:
         app: nginx
         tier: test-deployment
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: module
-                    operator: In
-                    values:
-                      - NGIN
+      nodeSelector:
+        nginx: true
       containers:
       - name: nginx
         image: nginx:latest
